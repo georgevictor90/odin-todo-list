@@ -1,12 +1,12 @@
-import Bicycle from './bicycle.svg';
+import HappyNews from './inbox.svg';
 
-export default function showToday() {
+export default function showIndex() {
   const content = document.querySelector('.content');
   const header = document.querySelector('.header');
   const menuBar = document.querySelector('.menu-bar');
   
   const sectionName = document.createElement('h3');
-  sectionName.textContent = 'Today';
+  sectionName.textContent = 'Inbox';
   header.appendChild(sectionName);
 
   const kebabMenu = document.createElement('div');
@@ -17,20 +17,20 @@ export default function showToday() {
   sectionContent.classList.add('section-content');
   content.insertBefore(sectionContent, menuBar);
 
-  const bicycleImg = document.createElement('img');
-  bicycleImg.classList.add('section-image');
-  bicycleImg.src = Bicycle;
-  sectionContent.appendChild(bicycleImg);
+  const inboxImg = document.createElement('img');
+  inboxImg.classList.add('section-image');
+  inboxImg.src = HappyNews;
+  sectionContent.appendChild(inboxImg);
 
   const sectionContentInfo = document.createElement('div');
   sectionContentInfo.classList.add('section-content-info');
   sectionContent.appendChild(sectionContentInfo);
   const status = document.createElement('p');
   status.setAttribute('style', 'white-space: pre;');
-  status.textContent = "You're all done for today! \n Congratulations!";
+  status.textContent = "All clear";
   sectionContentInfo.appendChild(status);
   const para = document.createElement('p');
-  para.textContent = 'Enjoy the rest of the day!';
+  // para.setAttribute('style', 'white-space: pre;');
+  para.textContent = "Looks like everything's organized in the right place. \n Tap + to add a task";
   sectionContentInfo.appendChild(para);
-
 }
