@@ -21,6 +21,7 @@ body {
   max-height: 100vh;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
 }
 .content {
   display: flex;
@@ -145,9 +146,19 @@ h3 {
 .projects-section {
   margin-top: 40px;
 }
+.project-section-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.new-project-button {
+  width: 30px;
+  opacity: 0.6;
+}
+
 .projects-section-title {
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 .projects-section-list {
   padding-left: 10px;
@@ -164,6 +175,216 @@ h3 {
   border-radius: 50%;
   display: inline-block;
 }
+.button-icon {
+  width: 20px;
+}
+
+/* task editor */
+.modal {
+  padding: 0;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 10px;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, .7);
+}
+.close-modal {
+  /* position: absolute; */
+  /* top: 2px;
+  right: 10px; */
+  grid-column: 2/3;
+  font-size: 2em;
+  background: transparent;
+  border: none;
+  opacity: .6;
+  align-self: start;
+  justify-self: center;
+}
+.task-editor {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr; */
+  /* position: relative; */
+  padding: 10px;
+  flex-direction: column;
+}
+.input-fields {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.extra-fields{
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.task-title-input,
+.task-description-input{
+  border: none;
+  padding: 10px;
+}
+.task-description-input{
+  font-size: .8em;
+  height: 7ch;
+  resize: none;
+}
+.pills{
+  display: flex;
+  gap: 10px;
+  padding: 6px;
+}
+.due-date-button,
+.folder-select-button {
+  padding: .5rem .3rem;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 10px;
+  font-size: .9em;
+  width: 100px;
+}
+
+.due-date-button{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.submit-button {
+  grid-column: 2/3;
+  grid-row: 3/4;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  align-self: flex-end;
+}
+
+.submit-button-icon {
+  width: 25px;
+  opacity: .6;
+}
+
+/* newProject Form */
+.new-project-form {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 20px;
+  opacity: 1;
+  transition: all 400ms ease;
+}
+.close-project-form{
+  transform: translateX(100%);
+  opacity: 0;
+}
+.new-project-form-header {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+.new-project-form-h3 {
+  margin-left: 30px;
+  font-size: 1.5em;
+}
+.new-project-form-save {
+  margin-left: auto;
+}
+.new-project-form-back,
+.new-project-form-save {
+  width: 30px;
+  opacity: 0.6;
+}
+
+.form-group {
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  padding:10px;
+  border: 3px solid rgba(255, 2, 2, 0.8);
+  border-radius: 5px;
+  /* margin: 10px; */
+  position: relative;
+  opacity: .6;
+}
+.form-group>label {
+  position:absolute;
+  top: -14px;
+  left: 20px; 
+  background-color: white;
+  font-size: 1.2em;
+}
+.form-group>input,
+.form-group>input:active {
+  border: none;
+  outline: none;
+  width: 90%;
+  padding: 10px;
+  font-size: 1.5em;
+}
+.color-form-group{
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+}
+.color-label-and-name {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.color-icon {
+  width: 35px;
+}
+.selected-color-label {
+  font-size: 1.3em;
+}
+.selected-project-color {
+  font-size: 1em;
+}
+
+/* color filters */
+.charcoal {
+  filter: invert(23%) sepia(8%) saturate(1530%) hue-rotate(161deg) brightness(97%) contrast(87%);
+}
+
+.red {
+  filter: invert(15%) sepia(90%) saturate(6449%) hue-rotate(359deg) brightness(108%) contrast(114%);
+}
+
+/* color choices container */
+.color-choices-container {
+  overflow: scroll;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  height: 90vh;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 20px;
+  opacity: 1;
+  transition: all 400ms ease;
+}
+.close-color-choices{
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.default-color{
+  filter: invert(23%) sepia(8%) saturate(1530%) hue-rotate(161deg) brightness(97%) contrast(87%);
+}
+
 /* fonts */
 
 /* mobile styles */

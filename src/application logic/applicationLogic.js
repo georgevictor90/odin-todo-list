@@ -23,3 +23,5 @@ function newProject() {
     },
   }
 }
+
+export const Projects = newProject();

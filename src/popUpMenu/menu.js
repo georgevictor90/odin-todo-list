@@ -1,6 +1,8 @@
 import Tray from './tray.svg';
 import Calendar from './calendar.svg';
 import Close from './x.svg'
+import { arrayOfProjectTitles } from '..';
+import PlusCircle from './plus-circle-solid.svg';
 
 export default function showMenu() {
  const content = document.querySelector('.content');
@@ -50,16 +52,25 @@ export default function showMenu() {
  projectsSection.classList.add('projects-section');
  menu.appendChild(projectsSection);
 
+ const projectsSectionHeader = document.createElement('div');
+ projectsSectionHeader.classList.add('project-section-header');
+ projectsSection.appendChild(projectsSectionHeader);
+
  const projectsSectionTitle = document.createElement('span');
  projectsSectionTitle.textContent = 'Projects';
  projectsSectionTitle.classList.add('projects-section-title');
- projectsSection.appendChild(projectsSectionTitle);
+ projectsSectionHeader.appendChild(projectsSectionTitle);
+
+ const newProjectBtn = document.createElement('img');
+ newProjectBtn.src = PlusCircle;
+ newProjectBtn.classList.add('new-project-button');
+ projectsSectionHeader.appendChild(newProjectBtn);
 
  const projectsSectionList = document.createElement('ul');
  projectsSectionList.classList.add('projects-section-list');
  projectsSection.appendChild(projectsSectionList);
 
- const arrayOfProjectTitles = ['Welcome', 'Try Boards', 'Organize your life'];
+//  const arrayOfProjectTitles = ['Welcome', 'Try Boards', 'Organize your life'];
  arrayOfProjectTitles.forEach(title => {
    const projectItem = document.createElement('li');
    projectItem.classList.add('project-item');
