@@ -1,7 +1,7 @@
 import Calendar from '../assets/icons/calendar.svg';
 import PaperPlane from '../assets/icons/paper-plane-right.svg';
 import { folders } from '..';
-import { arrayOfProjectTitles } from '..';
+import { updateFolderButtonOptions, updateFolders } from '../application logic/applicationLogic';
 
 export default function showTaskEditor() {
   const content = document.querySelector('.content');
@@ -83,10 +83,12 @@ export default function showTaskEditor() {
   const folderButton = document.createElement('select');
   folderButton.classList.add('folder-select-button');
   pills.appendChild(folderButton);
+  
+  // updateFolderButtonOptions();
   folders.forEach(folder => {
     const option = document.createElement('option');
     option.textContent = folder;
-    option.value = folder.toLowerCase();
+    option.value = folder;
     folderButton.appendChild(option);
   });
 

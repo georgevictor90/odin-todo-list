@@ -61,11 +61,6 @@ export default function showNewProjectForm() {
   colorLabelAndName.classList.add('color-label-and-name')
   colorFormGroup.appendChild(colorLabelAndName);
 
-  // colorLabelAndName.addEventListener('click', () => {
-  //   colorIcon.classList.remove(colorIcon.classList[1]);
-  //   colorIcon.classList.add('rosu');
-  // })
-
   const selectedColorLabel = document.createElement('span');
   selectedColorLabel.classList.add('selected-color-label');
   selectedColorLabel.textContent = 'Color';

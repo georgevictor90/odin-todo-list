@@ -1,8 +1,9 @@
 import Tray from './tray.svg';
 import Calendar from './calendar.svg';
 import Close from './x.svg'
-import { arrayOfProjectTitles } from '..';
 import PlusCircle from './plus-circle-solid.svg';
+// import { userProjects } from '../application logic/applicationLogic';
+import { updateProjectsSectionList } from '../application logic/applicationLogic';
 
 export default function showMenu() {
  const content = document.querySelector('.content');
@@ -70,31 +71,7 @@ export default function showMenu() {
  projectsSectionList.classList.add('projects-section-list');
  projectsSection.appendChild(projectsSectionList);
 
-//  const arrayOfProjectTitles = ['Welcome', 'Try Boards', 'Organize your life'];
- arrayOfProjectTitles.forEach(title => {
-   const projectItem = document.createElement('li');
-   projectItem.classList.add('project-item');
-   projectsSectionList.appendChild(projectItem);
-   const projectSpan = document.createElement('span');
-   projectSpan.textContent = title;
-   projectSpan.classList.add('project-span');
-   projectItem.appendChild(projectSpan);
- });
-
- const projectItems = document.querySelectorAll('.projects-section-list li');
- projectItems.forEach(projectItem => {
-   const circle = document.createElement('span');
-   circle.classList.add('circle');
-   projectItem.insertBefore(circle, projectItem.firstChild);
-   circle.style.backgroundColor = `${getColor()}`;
- })
- 
- function getColor() {
-  return "hsla(" + ~~(360 * Math.random()) + "," +
-  "70%,"+
-  "80%,1)"
- }
-
+ updateProjectsSectionList();
 }
   
 

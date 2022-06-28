@@ -1,6 +1,6 @@
 import HappyNews from './inbox.svg';
 
-export default function showIndex() {
+export default function showInbox() {
   const content = document.querySelector('.content');
   const header = document.querySelector('.header');
   const menuBar = document.querySelector('.menu-bar');
