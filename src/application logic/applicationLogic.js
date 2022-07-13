@@ -32,7 +32,7 @@ function newProjectContainer() {
   }
 }
 
- export function newProject(name, color, isCurrentProject) {
+export function newProject(name, color, isCurrentProject) {
   return {
     length: 0,
     name: name,
@@ -165,7 +165,7 @@ export function listenForProjectClick() {
     projectLink.addEventListener('click', () => {
       menu.classList.toggle('close');
       setCurrentProject(userProjects, projectLink.textContent);
-      removeFromDOM();
+      // removeFromDOM();
       goToPage();
       setDefaultCurrentProjectsToFalse();
     })
@@ -189,6 +189,18 @@ export function updateFolders() {
   for (let i = 0; i < userProjects.length; i++) {
     folders.push(userProjects[i].name);
   }
+}
+
+export function updateFolderButtonOptions() {
+  console.log('started update folder button');
+  const folderButton = document.querySelector('.folder-select-button');
+  folderButton.innerHTML = "";
+  folders.forEach(folder => {
+    const option = document.createElement('option');
+    option.textContent = folder;
+    option.value = folder;
+    folderButton.appendChild(option);
+  });
 }
 
 export function updateFolderButtonOptions() {

@@ -1,24 +1,15 @@
 import './style.css';
-import showToday from './today/todayPage';
 import HamburgerMenu from './assets/icons/Hamburger_icon.svg';
-import MagnifyingGlass from './assets/icons/magnifying-glass.svg';
-import Bell from './assets/icons/bell.svg';
-import showInbox from './inbox/inbox';
-import showMenu from './popUpMenu/menu';
-import showTaskEditor from './task editor/taskEditor';
-import showNewProjectForm from './newProjectForm/newProjectForm';
-import showColorChoices from './projectColors/projectColors';
-import { emptyElement, newProject ,Projects, updateProjectsSectionList, userProjects } from './application logic/applicationLogic';
-import goToPage from './goToPage/goToPage';
-import { setCurrentProject } from './application logic/applicationLogic';
-import { setDefaultCurrentProjectsToFalse } from './application logic/applicationLogic';
-import { listenForProjectClick } from './application logic/applicationLogic';
-import { removeFromDOM } from './application logic/applicationLogic';
-import { setProjectFilter } from './application logic/applicationLogic';
-import { newTodo } from './application logic/applicationLogic';
-import { updateFolders } from './application logic/applicationLogic';
-import { updateFolderButtonOptions } from './application logic/applicationLogic';
-
+import { goToPage } from './goToPage/goToPage';
+import { defaultSections, userProjects, getCurrentProject, setCurrentProject } from './currentProjectFunctions';
+import { newProject } from './factoryFunctions';
+import { showMenu } from './popUpMenu/menu';
+import { showNewProjectForm, clearNewProjectForm} from './newProjectForm/newProjectForm';
+import {showTaskEditor, updateFolderButtonOptions} from './task editor/taskEditor';
+import { showManageProjects } from './manageProjects/manageProjects';
+import { showEditProjectForm } from './editProjectForm/editProjectForm';
+import GithubIcon from './assets/icons/github.svg';
+import Fullscreen from './assets/icons/expand-arrows-alt-solid.svg';
 
 const content = document.querySelector('.content');
 const header = document.createElement('div');
@@ -40,127 +31,113 @@ addTaskBtn.type = 'button';
 addTaskBtn.textContent = '+';
 menuBar.appendChild(addTaskBtn);
 
-const searchBtn = document.createElement('img');
-searchBtn.classList.add('search-button');
-searchBtn.src = MagnifyingGlass;
-menuBar.appendChild(searchBtn);
+const copyrightDiv = document.createElement('div');
+copyrightDiv.classList.add('copyright-div');
+menuBar.appendChild(copyrightDiv);
 
-const notificationsBtn = document.createElement('img');
-notificationsBtn.classList.add('notifications-button');
-notificationsBtn.src = Bell;
-menuBar.appendChild(notificationsBtn);
+const githubLink = document.createElement('a');
+githubLink.classList.add('github-link');
+githubLink.href = 'https://github.com/georgevictor90';
+githubLink.target = '_blank';
+copyrightDiv.appendChild(githubLink);
 
-export let folders = [Projects[0].name, Projects[1].name];
+const githubIcon = document.createElement('img');
+githubIcon.src = GithubIcon;
+githubIcon.classList.add('github-icon');
+githubLink.appendChild(githubIcon);
 
+const copyright = document.createElement('span');
+copyright.textContent = `\u00A9 George Victor Lacatus`;
+copyright.classList.add('copyright');
+menuBar.appendChild(copyright);
 
-goToPage();
-showMenu();
-showTaskEditor();
-showNewProjectForm();
-showColorChoices();
+const sectionName = document.createElement('h3');
+sectionName.classList.add('section-name');
+header.appendChild(sectionName);
 
-const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('.close-modal');
+const fullscreenIcon = document.createElement('img');
+fullscreenIcon.classList.add('fullscreen-icon');
+fullscreenIcon.src = Fullscreen;
+header.appendChild(fullscreenIcon);
 
-const menu = document.querySelector('.popup-menu');
-hamburgerMenuButton.addEventListener('click', () => {
-  menu.classList.toggle('close');
-});
+const sectionContent = document.createElement('div');
+sectionContent.classList.add('section-content');
+content.insertBefore(sectionContent, menuBar);
 
-const closeBtn = document.querySelector('.close-button');
-closeBtn.addEventListener('click', () => {
-  menu.classList.toggle('close');
-});
-
-const newProjectBtn = document.querySelector('.new-project-button');
-const newProjectForm = document.querySelector('.new-project-form');
-const backBtn = document.querySelector('.new-project-form-back');
-const newProjectSave = document.querySelector('.new-project-form-save');
 const projectsSectionList = document.querySelector('.projects-section-list');
-
-newProjectSave.addEventListener('click', () => {
-  const userProject = newProject(newProjectNameInput.value, selectedProjectColor.textContent);
-  setProjectFilter(userProject);
-  Projects[2].addElem(userProject);
-  setCurrentProject(userProjects, newProjectNameInput.value);
-  setDefaultCurrentProjectsToFalse();
-  clearNewProjectForm();
-  emptyElement(projectsSectionList);
-  updateProjectsSectionList();
-  listenForProjectClick();
-  removeFromDOM();
-  goToPage();
-  updateFolders();
-})
-
-newProjectBtn.addEventListener('click', () => {
-  menu.classList.toggle('close');
-  newProjectForm.classList.toggle('close-project-form');
-})
-
 const newProjectNameInput = document.querySelector('.new-project-name-input');
 const mainColorIcon = document.querySelector('.main-color-icon');
 const selectedProjectColor = document.querySelector('.selected-project-color');
-backBtn.addEventListener('click', () => {
-  clearNewProjectForm();
-})
-
-function clearNewProjectForm() {
-  newProjectForm.classList.toggle('close-project-form');
-  newProjectNameInput.value = '';
-  mainColorIcon.style.filter = 'unset';
-  mainColorIcon.classList.add('default-color');
-  selectedProjectColor.textContent = 'Charcoal';
-}
-
-const sectionLinks = document.querySelectorAll('.menu-sections-list>li');
-sectionLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    menu.classList.toggle('close');
-    removeFromDOM();
-    setCurrentProject(Projects, link.textContent);
-    if (Projects[2].length > 0) {
-      setCurrentProject(Projects[2], link.textContent)
-    };
-    goToPage();
-  })
-})
-
-addTaskBtn.addEventListener('click', () => {
-  modal.showModal();
-  updateFolderButtonOptions();
-})
-
-window.addEventListener('click', (e) => {
- if (e.target.tagName !== 'DIALOG') return
- modal.close();
-})
-
+const sectionLinks = document.querySelectorAll('.popup-menu li');
 const colorFormGroup = document.querySelector('.color-form-group');
 const colorChoicesContainer = document.querySelector('.color-choices-container');
-colorFormGroup.addEventListener('click', () => {
-  colorChoicesContainer.classList.toggle('close-color-choices');
-})
-
 const newTaskSubmit = document.querySelector('.submit-button');
 const newTaskTitle = document.querySelector('.task-title-input');
 const newTaskDescription = document.querySelector('.task-description-input');
 const newTaskDate = document.querySelector('.due-date-button');
 const newTaskFolder = document.querySelector('.folder-select-button');
 
-newTaskSubmit.addEventListener('click', () => {
-  if (newTaskTitle.value.length === 0) return
+const Inbox = newProject('Inbox','green', false);
+Inbox.statusText = "All clear";
+Inbox.paraText = "Looks like everything's organized in the right place. \n Tap + to add a task";
 
-  // console.log(newTaskTitle.value, newTaskDescription.value, newTaskDate.value, newTaskFolder.value);
+const Today = newProject('Today','blue', true);
+Today.statusText = "You're all done for today! \n Congratulations!";
+Today.paraText = "Enjoy the rest of the day!";
 
-  const task = newTodo(newTaskTitle.value, newTaskDescription.value, newTaskDate.value);
+defaultSections.push(Inbox, Today);
+setCurrentProject(defaultSections, Today.name);
+let currentProject = getCurrentProject();
 
-  for (let i = 0; i < userProjects.length; i++) {
-    if (userProjects[i].name === newTaskFolder.value) {
-      // console.log(userProjects[i]);
-      userProjects[i].addTodos(task);
-    }
-  }
-  // console.log(task);
-  
+goToPage(currentProject);
+showMenu();
+showNewProjectForm();
+showTaskEditor();
+showManageProjects();
+showEditProjectForm();
+
+//event listeners
+const modal = document.querySelector('.modal');
+
+addTaskBtn.addEventListener('click', () => {
+  modal.showModal();
+  updateFolderButtonOptions();
 })
+
+const newProjectBtn = document.querySelector('.new-project-button');
+const menu = document.querySelector('.popup-menu');
+const newProjectForm = document.querySelector('.new-project-form');
+
+newProjectBtn.addEventListener('click', () => {
+  menu.classList.toggle('close');
+  newProjectForm.classList.toggle('close-project-form');
+})
+
+const backBtn = document.querySelector('.new-project-form-back');
+backBtn.addEventListener('click', () => {
+  clearNewProjectForm();
+})
+
+const editProjectForm = document.querySelector('.edit-project-form');
+
+const editBackBtn = document.querySelector('.edit-project-form-back');
+editBackBtn.addEventListener('click', () => {
+  editProjectForm.classList.toggle('close-edit-project-form');
+})
+
+///////////////////////////////////////////
+function requestFullScreen(element) {
+  // Supports most browsers and their versions.
+  var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+  if (requestMethod) { // Native full screen.
+      requestMethod.call(element);
+  } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+          wscript.SendKeys("{F11}");
+      }
+  }
+}
+
+var elem = document.body; // Make the body go full screen.
