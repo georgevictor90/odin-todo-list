@@ -1,10 +1,7 @@
 import Arrow from '../newProjectForm/arrow-left-solid.svg';
 import Check from '../newProjectForm/check-solid.svg';
 import ListAlt from '../newProjectForm/list-alt.svg';
-import Circle from '../assets/icons/mycircle.svg';
-import { newProject } from '../factoryFunctions';
 import { userProjects,setCurrentProject, getCurrentProject } from '../currentProjectFunctions';
-import { goToPage } from '../goToPage/goToPage';
 import { updateManageProjectsList } from '../manageProjects/manageProjects';
 import { setProjectFilter, showColorChoices, updateProjectsSectionList } from '../newProjectForm/newProjectForm';
 
@@ -44,7 +41,6 @@ export function showEditProjectForm() {
   label.classList.add('edit-project-name-label');
   editFormGroup.appendChild(label);
 
-
   const editProjectNameInput = document.createElement('input');
   editProjectNameInput.type = 'text';
   editProjectNameInput.id = 'editProjectName';
@@ -76,19 +72,16 @@ export function showEditProjectForm() {
   editSelectedProjectColor.classList.add('edit-selected-project-color');
   editSelectedProjectColor.textContent = 'Charcoal';
   editColorLabelAndName.appendChild(editSelectedProjectColor);
-  // showColorChoices();
-
   
   const colorChoicesContainer = document.querySelector('.color-choices-container');
   editColorFormGroup.addEventListener('click', () => {
     colorChoicesContainer.classList.toggle('close-color-choices');  
-  })
+  });
 
   const manageProjectsBtn = document.querySelector('.manage-projects-button');
   manageProjectsBtn.addEventListener('click', () => {
     const manageProjects = document.querySelector('.manage-projects');
     manageProjects.classList.toggle('close');
-    // editProjectForm.classList.toggle('close-edit-project-form');
   })
 
   editProjectFormSaveBtn.addEventListener('click', () => {

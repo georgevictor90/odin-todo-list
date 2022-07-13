@@ -1,7 +1,4 @@
-import Calendar from '../assets/icons/calendar.svg';
 import PaperPlane from '../assets/icons/paper-plane-right.svg';
-import { folders } from '..';
-// import { updateFolderButtonOptions, updateFolders } from '../application logic/applicationLogic';
 import { defaultSections, getCurrentProject, userProjects } from '../currentProjectFunctions';
 import { newTodo } from '../factoryFunctions';
 import { showTasks } from '../goToPage/goToPage';
@@ -81,33 +78,14 @@ export function showTaskEditor() {
   dueDateButton.classList.add('due-date-button');
   pills.appendChild(dueDateButton);
 
-  // const dueDateButtonIcon = document.createElement('img');
-  // dueDateButtonIcon.src = Calendar;
-  // dueDateButtonIcon.classList.add('button-icon');
-  // dueDateButton.appendChild(dueDateButtonIcon);
-
-  // const dueDateButtonText = document.createElement('span');
-  // dueDateButtonText.textContent = 'Due date';
-  // dueDateButtonText.classList.add('button-text');
-  // dueDateButton.appendChild(dueDateButtonText);
-
   const folderButton = document.createElement('select');
   folderButton.classList.add('folder-select-button');
   pills.appendChild(folderButton);
   
   updateFolderButtonOptions();
-  // const folders = ['Inbox', 'Today'];
-  // folders.forEach(folder => {
-  //   console.log('wtf man');
-  //   const option = document.createElement('option');
-  //   option.textContent = folder;
-  //   option.value = folder;
-  //   folderButton.appendChild(option);
-  // });
 
   const submit = document.createElement('button');
   submit.type = 'button';
-  // submit.formMethod = 'dialog';
   submit.classList.add('submit-button');
   newTaskForm.appendChild(submit);
 
@@ -146,7 +124,6 @@ export function showTaskEditor() {
     console.log(defaultSections[1]);
     showTasks();
     clearForm();
-    // goToPage();
   })
 }
 
@@ -160,13 +137,6 @@ function clearForm() {
 export function updateFolderButtonOptions() {
   const folderButton = document.querySelector('.folder-select-button');
   folderButton.innerHTML = "";
-
-  // defaultSections.forEach(section => {
-  //   const option = document.createElement('option');
-  //   option.textContent = section.name;
-  //   option.value = section.name;
-  //   folderButton.appendChild(option);
-  // });
 
   const option = document.createElement('option');
   option.textContent = defaultSections[0].name;
@@ -189,5 +159,4 @@ export function updateFolderButtonOptions() {
       return
     }
   })
-
 }

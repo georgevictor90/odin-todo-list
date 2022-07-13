@@ -1,22 +1,11 @@
 import InboxSrc from '../assets/inbox.svg';
 import TodaySrc from '../assets/bicycle.svg';
 import ProjectSrc from '../assets/illustrations/undraw-project-src.svg';
-// import { checkCurrentProject, Projects, userProjects } from '../application logic/applicationLogic';
 import TaskCircle from '../assets/icons/circle.svg';
 import TaskCircleChecked from '../assets/icons/check-circle.svg';
-// import { checkCurrentProject } from "../application logic/applicationLogic";
 import { getCurrentProject, userProjects } from "../currentProjectFunctions";
-// import { currentProject } from '../../../backup code for todo list';
 
-
-
-//////////////////////////////////////////////////////////////////////
 export function goToPage(project) {
-  const content = document.querySelector('.content');
-  const header = document.querySelector('.header');
-  const menuBar = document.querySelector('.menu-bar');
-  
-  
   updateSectionTitle();
   clearSectionContent();
 

@@ -5,7 +5,6 @@ import Remove from './trash-alt.svg';
 import Close from '../popUpMenu/x.svg';
 import { updateProjectsSectionList } from "../newProjectForm/newProjectForm";
 
-
 export function showManageProjects() {
   const content = document.querySelector('.content');
   const manageProjects = document.createElement('div');
@@ -29,8 +28,6 @@ export function showManageProjects() {
   manageProjectsCloseBtn.addEventListener('click', () => {
     manageProjects.classList.toggle('close');
   })
-
-
 
   const manageProjectsList = document.createElement('ul');
   manageProjectsList.classList.add('manage-projects-list');
@@ -107,6 +104,5 @@ export function updateManageProjectsList() {
         updateProjectsSectionList();
       }
     })
-
   }
 }
